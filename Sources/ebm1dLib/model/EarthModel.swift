@@ -1,6 +1,6 @@
 import Foundation
 
-fileprivate struct BandInfo {
+private struct BandInfo {
     public let dRad: Double
     public let lats: [Double]
 }
@@ -43,17 +43,14 @@ struct EarthModel {
     }
 
     private static func getBandHeights(_ bandInfo: BandInfo) -> [Double] {
-        return bandInfo.lats.map {
-            latStart in
+        return bandInfo.lats.map { latStart in
             return sin(latStart + bandInfo.dRad) - sin(latStart - bandInfo.dRad)
         }
     }
 
     private static func getNormedAreas(_ lats: [Double], _ hLat: [Double]) -> [Double] {
         let radii = lats.map { cos($0) }
-        let areas = zip(radii, hLat).map {
-            (r, h) in r * h
-        }
+        let areas = zip(radii, hLat).map { $0 * $1 }
         let totalArea = areas.reduce(0) { $0 + $1 }
         return areas.map { $0 / totalArea }
     }

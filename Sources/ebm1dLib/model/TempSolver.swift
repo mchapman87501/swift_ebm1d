@@ -1,5 +1,5 @@
 extension Array where Element == Double {
-    func sum() -> Element{
+    func sum() -> Element {
         return self.reduce(0) { $0 + $1 }
     }
 }
@@ -37,8 +37,7 @@ class TempSolver {
             let fractTemps = zip(em.latsFract, temp).map { $0 * $1 }
             let tempAvg = fractTemps.sum()
 
-            temp = zip(albedo, insol).map {
-                albedo, insol in
+            temp = zip(albedo, insol).map { albedo, insol in
                 (insol * (1.0 - albedo) + f * tempAvg - a) / denom
             }
             let absTempDiff = zip(tempOld, temp).map { abs($0 - $1) }

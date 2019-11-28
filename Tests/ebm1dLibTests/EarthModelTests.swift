@@ -27,7 +27,6 @@ final class EarthModelTests: XCTestCase {
         try pTestLatsFract(36)
     }
 
-
     func pTestLatsHeight(_ numZones: Int) throws {
         let em = EarthModel(numZones: numZones)
         let sum = em.latsFract.reduce(0) { $0 + $1 }
@@ -56,6 +55,6 @@ final class EarthModelTests: XCTestCase {
         ("testConstructor", testConstructor),
         ("testLatsFract", testLatsFract),
         ("testLatsHeight", testLatsHeight),
-        ("testEffectiveSolarConst", testEffectiveSolarConst),
+        ("testEffectiveSolarConst", testEffectiveSolarConst)
     ]
 }
