@@ -8,13 +8,13 @@ enum ConvergeError: Error {
     case failedToConverge
 }
 
-struct Solution {
-    let temps: [Double]
-    let albedos: [Double]
-    let avg: Double
-}
-
 class TempSolver {
+    public struct Solution {
+        let temps: [Double]
+        let albedos: [Double]
+        let avg: Double
+    }
+
     let em: EarthModel
     let f: Double
 

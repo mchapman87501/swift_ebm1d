@@ -18,7 +18,9 @@ extension Array where Element == Double {
 }
 
 final class TempSolverTests: XCTestCase {
-    func getTAvg(solver: TempSolver, sm: [Double], temps tempsInitial: [Double]) throws -> (avgTemps: [Double], finalTemps: [Double]) {
+    func getTAvg(
+        solver: TempSolver, sm: [Double], temps tempsInitial: [Double]
+    ) throws -> (avgTemps: [Double], finalTemps: [Double]) {
         var avgTemps = [Double]()
         var temps = tempsInitial
         for m in sm {
@@ -34,7 +36,7 @@ final class TempSolverTests: XCTestCase {
         let em = EarthModel(numZones: numZones)
         let solver = TempSolver(em: em)
         let temps = [Double](repeating: -60.0, count: numZones)
-        
+
         let smRising = stride(from: 0.1, to: 100.0, by: 0.5).map {$0}
         let smFalling = stride(from: 100.0, to: 0.1, by: -0.5).map {$0}
 
