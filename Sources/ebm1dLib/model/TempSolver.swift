@@ -8,7 +8,7 @@ enum ConvergeError: Error {
     case failedToConverge
 }
 
-class TempSolver {
+struct TempSolver {
     public struct Solution {
         let temps: [Double]
         let albedos: [Double]
@@ -18,7 +18,9 @@ class TempSolver {
     let em: EarthModel
     let f: Double
 
-    init(em earthModel: EarthModel, f latTransferCoeff: Double = 7.6) {
+    init(
+        em earthModel: EarthModel,
+        f latTransferCoeff: Double = Defaults.latTransferCoeff) {
         em = earthModel
         f = latTransferCoeff
     }
