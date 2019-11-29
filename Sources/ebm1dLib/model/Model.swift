@@ -18,16 +18,21 @@ struct Model {
         let numSolarMults = 10
         let delta = (maxSolarMult - minSolarMult) / Double(numSolarMults)
 
-        let smRising = stride(from: minSolarMult, to: maxSolarMult, by: delta).map {$0}
-        let smFalling = stride(from: maxSolarMult, to: minSolarMult, by: -delta).map {$0}
+        let smRising = stride(
+            from: minSolarMult, to: maxSolarMult, by: delta).map {$0}
+        let smFalling = stride(
+            from: maxSolarMult, to: minSolarMult, by: -delta).map {$0}
 
         var result = [AvgTempResult]()
         result.reserveCapacity(2 * numSolarMults)
         var temps = gat0
         for smSeq in [smRising, smFalling] {
             for sm in smSeq {
-                if let solution = try? solver.solve(solarMultiplier: sm, temp: temps) {
-                    let record = AvgTempResult(delta: delta, solarMult: sm, solution: solution)
+                if let solution = try? solver.solve(
+                    solarMultiplier: sm, temp: temps
+                ) {
+                    let record = AvgTempResult(
+                        delta: delta, solarMult: sm, solution: solution)
                     result.append(record)
                     temps = solution.temps
                 }

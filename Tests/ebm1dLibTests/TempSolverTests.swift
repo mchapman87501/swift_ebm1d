@@ -58,4 +58,8 @@ final class TempSolverTests: XCTestCase {
         let fStepCount = isFStep.reduce(0) { $0 + ($1 ? 1 : 0) }
         XCTAssertEqual(fStepCount, 2)
     }
+
+    static var allTests = [
+        ("testDefaultScenario", testDefaultScenario)
+    ]
 }
