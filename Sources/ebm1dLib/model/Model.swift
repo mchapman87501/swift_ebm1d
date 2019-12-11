@@ -1,11 +1,11 @@
-struct Model {
-    struct AvgTempResult {
-        let delta: Double
-        let solarMult: Double
-        let solution: TempSolver.Solution
+public struct Model {
+    public struct AvgTempResult {
+        public let delta: Double
+        public let solarMult: Double
+        public let solution: TempSolver.Solution
     }
 
-    static func getSolutions(
+    public static func getSolutions(
         minSM minSolarMult: Double, maxSM maxSolarMult: Double,
         gat0 globalAvgTemp0: Double, numZones: Int,
         f latTransferCoeff: Double = Defaults.latTransferCoeff

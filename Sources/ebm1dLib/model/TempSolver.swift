@@ -8,11 +8,11 @@ enum ConvergeError: Error {
     case failedToConverge
 }
 
-struct TempSolver {
+public struct TempSolver {
     public struct Solution {
-        let temps: [Double]
-        let albedos: [Double]
-        let avg: Double
+        public let temps: [Double]
+        public let albedos: [Double]
+        public let avg: Double
     }
 
     let em: EarthModel
