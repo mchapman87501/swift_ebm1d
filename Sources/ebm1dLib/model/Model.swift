@@ -5,7 +5,7 @@ struct Model {
         let solution: TempSolver.Solution
     }
 
-    func getSolutions(
+    static func getSolutions(
         minSM minSolarMult: Double, maxSM maxSolarMult: Double,
         gat0 globalAvgTemp0: Double, numZones: Int,
         f latTransferCoeff: Double = Defaults.latTransferCoeff
