@@ -40,7 +40,7 @@ public struct Model {
 
         let gat0 = [Double](repeating: globalAvgTemp0, count: numZones)
 
-        let numSolarMults = 10
+        let numSolarMults = 50
         let delta = (maxSolarMult - minSolarMult) / Double(numSolarMults)
 
         let smRising = stride(
