@@ -39,10 +39,15 @@ public struct TempSolver {
             let fractTemps = zip(em.latsFract, temp).map { $0 * $1 }
             let tempAvg = fractTemps.sum()
 
-            temp = zip(albedo, insol).map { albedo, insol in
-                (insol * (1.0 - albedo) + f * tempAvg - a) / denom
+            temp = (0..<albedo.count).map { i in
+                let currAlb = albedo[i]
+                let currIns = insol[i]
+                return (currIns * (1.0 - currAlb) + f * tempAvg - a) / denom
             }
-            let absTempDiff = zip(tempOld, temp).map { abs($0 - $1) }
+            
+            let absTempDiff = (0..<temp.count).map { i in
+                abs(tempOld[i] - temp[i])
+            }
             let maxTempDiff = absTempDiff.max()!
             if maxTempDiff <= threshold {
                 return Solution(temps: temp, albedos: albedo, avg: tempAvg)
