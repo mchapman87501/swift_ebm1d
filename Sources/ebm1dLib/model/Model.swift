@@ -33,14 +33,14 @@ public struct Model {
     public static func getSolutions(
         minSM minSolarMult: Double, maxSM maxSolarMult: Double,
         gat0 globalAvgTemp0: Double, numZones: Int,
-        f latTransferCoeff: Double = Defaults.latTransferCoeff
+        f latTransferCoeff: Double = Defaults.latTransferCoeff,
+        steps numSolarMults: Int = 20
     ) -> Result {
         let em = EarthModel(numZones: numZones)
         let solver = TempSolver(em: em, f: latTransferCoeff)
 
         let gat0 = [Double](repeating: globalAvgTemp0, count: numZones)
 
-        let numSolarMults = 50
         let delta = (maxSolarMult - minSolarMult) / Double(numSolarMults)
 
         let smRising = stride(
