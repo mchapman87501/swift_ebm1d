@@ -9,7 +9,7 @@ public struct Model {
         public let rising: [AvgTempResult]
         public let falling: [AvgTempResult]
     }
-
+    
     static func solutionSeries(
         _ solver: TempSolver, _ delta: Double, _ smSeq: [Double],
         _ tempsIn: [Double]
@@ -55,3 +55,11 @@ public struct Model {
         return Result(rising: rRising, falling: rFalling)
     }
 }
+
+public extension Model.Result {
+    init() {
+        rising = []
+        falling = []
+    }
+}
+
