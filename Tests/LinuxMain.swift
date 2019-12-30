@@ -1,7 +1,7 @@
 import XCTest
 
-import ebm1dTests
+import ebm1dLibTests
 
 var tests = [XCTestCaseEntry]()
-tests += ebm1dTests.allTests()
+tests += ebm1dLibTests.allTests()
 XCTMain(tests)

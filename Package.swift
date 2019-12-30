@@ -6,7 +6,6 @@ import PackageDescription
 let package = Package(
     name: "ebm1d",
     products: [
-        .executable(name: "ebm1d", targets: ["ebm1d"]),
         .library(name: "ebm1dLib", targets: [ "ebm1dLib"])
     ],
     dependencies: [
@@ -20,12 +19,6 @@ let package = Package(
         .target(
             name: "ebm1dLib",
             dependencies: []),
-        .target(
-            name: "ebm1d",
-            dependencies: ["ebm1dLib"]),
-        .testTarget(
-            name: "ebm1dTests",
-            dependencies: ["ebm1d"]),
         .testTarget(
             name: "ebm1dLibTests",
             dependencies: ["ebm1dLib"])
