@@ -1,8 +1,13 @@
 public struct Model {
     public struct AvgTempResult {
+        // Input values that produced this result:
         public let delta: Double
         public let solarMult: Double
-        public let solution: TempSolver.Solution
+
+        // Result details:
+        public let temps: [Double]    // Temperature by latitude
+        public let albedos: [Double]  // Albedo by latitude
+        public let avg: Double        // global average temperature
     }
     
     public struct Result {
@@ -22,7 +27,9 @@ public struct Model {
                 solarMultiplier: sm, temp: temps
             ) {
                 let record = AvgTempResult(
-                    delta: delta, solarMult: sm, solution: solution)
+                    delta: delta, solarMult: sm,
+                    temps: solution.temps, albedos: solution.albedos,
+                    avg: solution.avg)
                 result.append(record)
                 temps = solution.temps
             }
