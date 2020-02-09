@@ -1,6 +1,6 @@
-# ebm1d
+# swiftui_ebm_1d
+This is a Swift implementation of a 1-D energy balance model from the edX course "Climate Change: The Science and Global Impact", by Dr. Michael Mann.
 
-This is a Swift implementation of a 1D energy balance model.  It is inspired by the 1D EBM discussed in the online course, ["Climate Change: The Science and Global Impact"](https://courses.edx.org/courses/course-v1:SDGAcademyX+CCSI001+3T2019/course/), by Dr. Michael Mann.
+For more background see this [ebm_1d](https://github.com/mchapman87501/ebm_1d) repository.
 
-For more background on the provenance of the algorithm see [https://github.com/mchapman87501/ebm_1d](https://github.com/mchapman87501/ebm_1d).
-
+A SwiftUI-based user interface that uses this model is available [here](https://github.com/mchapman87501/swiftui_ebm_1d).
