@@ -9,12 +9,12 @@ public struct Model {
         public let albedos: [Double]  // Albedo by latitude
         public let avg: Double        // global average temperature
     }
-    
+
     public struct Result {
         public let rising: [AvgTempResult]
         public let falling: [AvgTempResult]
     }
-    
+
     static func solutionSeries(
         _ solver: TempSolver, _ delta: Double, _ smSeq: [Double],
         _ tempsIn: [Double]
@@ -55,7 +55,6 @@ public struct Model {
         let smFalling = stride(
             from: maxSolarMult, to: minSolarMult, by: -delta).map {$0}
 
-            
         let temps = gat0
         let (rRising, tempsR) = Self.solutionSeries(solver, delta, smRising, temps)
         let (rFalling, _) = Self.solutionSeries(solver, delta, smFalling, tempsR)
@@ -69,4 +68,3 @@ public extension Model.Result {
         falling = []
     }
 }
-

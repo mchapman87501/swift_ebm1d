@@ -8,7 +8,7 @@ final class ModelTests: XCTestCase {
         let maxSM = 15.0
         let results = Model.getSolutions(
             minSM: minSM, maxSM: maxSM, gat0: -60.0, numZones: 9)
-        
+
         for series in [results.rising, results.falling] {
             XCTAssertTrue(series.count >= 2)
             for record in series {

@@ -44,7 +44,7 @@ public struct TempSolver {
                 let currIns = insol[i]
                 return (currIns * (1.0 - currAlb) + f * tempAvg - a) / denom
             }
-            
+
             let absTempDiff = (0..<temp.count).map { i in
                 abs(tempOld[i] - temp[i])
             }
