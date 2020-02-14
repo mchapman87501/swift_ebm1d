@@ -6,5 +6,5 @@ osx_image:
 
 script:
   - swift build
-  - swift test --enable-test-coverage
+  - swift test --enable-code-coverage
   - bash ci_scripts/report_test_coverage.sh
