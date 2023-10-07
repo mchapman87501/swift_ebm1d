@@ -1,13 +1,15 @@
-public struct Model {
+public enum Model {}
+
+extension Model {
     public struct AvgTempResult {
         // Input values that produced this result:
         public let delta: Double
         public let solarMult: Double
 
         // Result details:
-        public let temps: [Double]    // Temperature by latitude
+        public let temps: [Double]  // Temperature by latitude
         public let albedos: [Double]  // Albedo by latitude
-        public let avg: Double        // global average temperature
+        public let avg: Double  // global average temperature
     }
 
     public struct Result {
@@ -16,7 +18,9 @@ public struct Model {
     }
 
     static func solutionSeries(
-        _ solver: TempSolver, _ delta: Double, _ smSeq: [Double],
+        _ solver: TempSolver,
+        _ delta: Double,
+        _ smSeq: [Double],
         _ tempsIn: [Double]
     ) -> ([AvgTempResult], [Double]) {
         var result = [AvgTempResult]()
@@ -27,8 +31,10 @@ public struct Model {
                 solarMultiplier: sm, temp: temps
             ) {
                 let record = AvgTempResult(
-                    delta: delta, solarMult: sm,
-                    temps: solution.temps, albedos: solution.albedos,
+                    delta: delta,
+                    solarMult: sm,
+                    temps: solution.temps,
+                    albedos: solution.albedos,
                     avg: solution.avg)
                 result.append(record)
                 temps = solution.temps
@@ -38,8 +44,10 @@ public struct Model {
     }
 
     public static func getSolutions(
-        minSM minSolarMult: Double, maxSM maxSolarMult: Double,
-        gat0 globalAvgTemp0: Double, numZones: Int,
+        minSM minSolarMult: Double,
+        maxSM maxSolarMult: Double,
+        gat0 globalAvgTemp0: Double,
+        numZones: Int,
         f latTransferCoeff: Double = Defaults.latTransferCoeff,
         steps numSolarMults: Int = 20
     ) -> Result {
@@ -50,20 +58,18 @@ public struct Model {
 
         let delta = (maxSolarMult - minSolarMult) / Double(numSolarMults)
 
-        let smRising = stride(
-            from: minSolarMult, to: maxSolarMult, by: delta).map {$0}
-        let smFalling = stride(
-            from: maxSolarMult, to: minSolarMult, by: -delta).map {$0}
+        let smRise = Array(stride(from: minSolarMult, to: maxSolarMult, by: delta))
+        let smFall = Array(stride(from: maxSolarMult, to: minSolarMult, by: -delta))
 
         let temps = gat0
-        let (rRising, tempsR) = Self.solutionSeries(solver, delta, smRising, temps)
-        let (rFalling, _) = Self.solutionSeries(solver, delta, smFalling, tempsR)
+        let (rRising, tempsR) = Self.solutionSeries(solver, delta, smRise, temps)
+        let (rFalling, _) = Self.solutionSeries(solver, delta, smFall, tempsR)
         return Result(rising: rRising, falling: rFalling)
     }
 }
 
-public extension Model.Result {
-    init() {
+extension Model.Result {
+    public init() {
         rising = []
         falling = []
     }

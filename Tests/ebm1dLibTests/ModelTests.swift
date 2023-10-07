@@ -1,5 +1,5 @@
 import XCTest
-import class Foundation.Bundle
+
 @testable import ebm1dLib
 
 final class ModelTests: XCTestCase {
@@ -19,7 +19,9 @@ final class ModelTests: XCTestCase {
         }
     }
 
-    static var allTests = [
-        ("testGenTemps", testGenTemps)
-    ]
+    func testModelResultsInit() {
+        let results = Model.Result()
+        XCTAssertEqual(results.falling.count, 0)
+        XCTAssertEqual(results.rising.count, 0)
+    }
 }

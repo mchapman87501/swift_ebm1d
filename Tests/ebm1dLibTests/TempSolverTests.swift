@@ -1,9 +1,9 @@
 import XCTest
-import class Foundation.Bundle
+
 @testable import ebm1dLib
 
 final class TempSolverTests: XCTestCase {
-    func getTAvg(
+    private func getTAvg(
         solver: TempSolver, sm: [Double], temps tempsInitial: [Double]
     ) throws -> (avgTemps: [Double], finalTemps: [Double]) {
         var avgTemps = [Double]()
@@ -22,11 +22,13 @@ final class TempSolverTests: XCTestCase {
         let solver = TempSolver(em: em)
         let temps = [Double](repeating: -60.0, count: numZones)
 
-        let smRising = stride(from: 0.1, to: 20.0, by: 0.5).map {$0}
-        let smFalling = stride(from: 20.0, to: 0.1, by: -0.5).map {$0}
+        let smRising = Array(stride(from: 0.1, to: 20.0, by: 0.5))
+        let smFalling = Array(stride(from: 20.0, to: 0.1, by: -0.5))
 
-        let risingResults = try getTAvg(solver: solver, sm: smRising, temps: temps)
-        let fallingResults = try getTAvg(solver: solver, sm: smFalling, temps: risingResults.finalTemps)
+        let risingResults = try getTAvg(
+            solver: solver, sm: smRising, temps: temps)
+        let fallingResults = try getTAvg(
+            solver: solver, sm: smFalling, temps: risingResults.finalTemps)
 
         // There should be one step up and one step down, with slope being relatively
         // flat otherwise.
@@ -44,8 +46,4 @@ final class TempSolverTests: XCTestCase {
         let fStepCount = isFStep.reduce(0) { $0 + ($1 ? 1 : 0) }
         XCTAssertEqual(fStepCount, 2)
     }
-
-    static var allTests = [
-        ("testDefaultScenario", testDefaultScenario)
-    ]
 }

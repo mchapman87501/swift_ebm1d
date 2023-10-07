@@ -1,9 +1,8 @@
 import XCTest
-import class Foundation.Bundle
+
 @testable import ebm1dLib
 
 final class EarthModelTests: XCTestCase {
-
     func testConstructor() throws {
         let numZones = 9
         let em = EarthModel(numZones: numZones)
@@ -15,7 +14,7 @@ final class EarthModelTests: XCTestCase {
     }
 
     // Parameterized test.
-    func pTestLatsFract(_ numZones: Int) throws {
+    private func pTestLatsFract(_ numZones: Int) throws {
         let em = EarthModel(numZones: numZones)
         let sum = em.latsFract.reduce(0) { $0 + $1 }
         XCTAssertEqual(sum, 1.0, accuracy: 0.000001)
@@ -27,7 +26,7 @@ final class EarthModelTests: XCTestCase {
         try pTestLatsFract(36)
     }
 
-    func pTestLatsHeight(_ numZones: Int) throws {
+    private func pTestLatsHeight(_ numZones: Int) throws {
         let em = EarthModel(numZones: numZones)
         let sum = em.latsFract.reduce(0) { $0 + $1 }
         XCTAssertEqual(sum, 1.0, accuracy: 0.000001)
@@ -39,10 +38,10 @@ final class EarthModelTests: XCTestCase {
         try pTestLatsHeight(36)
     }
 
-    func pTestEffectiveSolarConst(_ numZones: Int) throws {
+    private func pTestEffectiveSolarConst(_ numZones: Int) throws {
         let em = EarthModel(numZones: numZones)
         let sum = em.insolByLat.reduce(0) { $0 + $1 }
-        XCTAssertEqual(sum, 1370.0 / 4.0, accuracy: 0.000001)
+        XCTAssertEqual(sum, 1_370.0 / 4.0, accuracy: 0.000001)
     }
 
     func testEffectiveSolarConst() throws {
@@ -50,11 +49,4 @@ final class EarthModelTests: XCTestCase {
         try pTestEffectiveSolarConst(18)
         try pTestEffectiveSolarConst(36)
     }
-
-    static var allTests = [
-        ("testConstructor", testConstructor),
-        ("testLatsFract", testLatsFract),
-        ("testLatsHeight", testLatsHeight),
-        ("testEffectiveSolarConst", testEffectiveSolarConst)
-    ]
 }

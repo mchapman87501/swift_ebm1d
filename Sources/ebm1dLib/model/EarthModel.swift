@@ -1,8 +1,8 @@
 import Foundation
 
 private struct BandInfo {
-    public let dRad: Double
-    public let lats: [Double]
+    let dRad: Double
+    let lats: [Double]
 }
 
 struct EarthModel {
@@ -14,10 +14,10 @@ struct EarthModel {
     let insolByLat: [Double]
 
     init(numZones zones: Int) {
-        let bandInfo = EarthModel.getLatBands(zones)
-        let hLat = EarthModel.getBandHeights(bandInfo)
-        let lFract = EarthModel.getNormedAreas(bandInfo.lats, hLat)
-        let insol = EarthModel.getInsolByLat(lFract)
+        let bandInfo = Self.getLatBands(zones)
+        let hLat = Self.getBandHeights(bandInfo)
+        let lFract = Self.getNormedAreas(bandInfo.lats, hLat)
+        let insol = Self.getInsolByLat(lFract)
 
         numZones = zones
         deltaRad = bandInfo.dRad
@@ -43,8 +43,8 @@ struct EarthModel {
     }
 
     private static func getBandHeights(_ bandInfo: BandInfo) -> [Double] {
-        return bandInfo.lats.map { latStart in
-            return sin(latStart + bandInfo.dRad) - sin(latStart - bandInfo.dRad)
+        bandInfo.lats.map { latStart in
+            sin(latStart + bandInfo.dRad) - sin(latStart - bandInfo.dRad)
         }
     }
 
@@ -56,7 +56,7 @@ struct EarthModel {
     }
 
     private static func getInsolByLat(_ fract: [Double]) -> [Double] {
-        let solConstEff = 1370.0 / 4.0
+        let solConstEff = 1_370.0 / 4.0
         return fract.map { solConstEff * $0 }
     }
 }
